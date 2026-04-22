@@ -7,17 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import seaborn as sns
 import warnings
-warnings.filterwarnings("ignore")
 
-# ────────────────────────────────────────────────
-# CONFIGURACIÓN DE PÁGINA
-# ────────────────────────────────────────────────
-st.set_page_config(
-    page_title="Supermarket Sales Dashboard",
-    page_icon="🛒",
-    layout="wide"
-)
-sns.set_theme(style="whitegrid", palette="muted")
 
 # ────────────────────────────────────────────────
 # CARGA DE DATOS
@@ -35,7 +25,7 @@ df_full = load_data()
 # ────────────────────────────────────────────────
 # SIDEBAR — FILTROS GLOBALES
 # ────────────────────────────────────────────────
-st.sidebar.header("🔍 Filtros")
+st.sidebar.header("Filtros")
 
 branch_map = {"A — Yangon": "A", "B — Mandalay": "B", "C — Naypyitaw": "C"}
 branches_selected = st.sidebar.multiselect(
@@ -66,7 +56,7 @@ else:
 # ────────────────────────────────────────────────
 # ENCABEZADO
 # ────────────────────────────────────────────────
-st.title("🛒 Supermarket Sales — Dashboard de Análisis")
+st.title(" Supermarket Sales — Dashboard de Análisis")
 st.markdown("Explore las principales métricas de ventas, productos y experiencia de cliente de la cadena.")
 
 # KPIs rápidos
@@ -81,7 +71,7 @@ st.divider()
 # ────────────────────────────────────────────────
 # ANÁLISIS 1 — EVOLUCIÓN TEMPORAL
 # ────────────────────────────────────────────────
-st.subheader("📈 Análisis 1: Evolución temporal de ventas")
+st.subheader("Análisis 1: Evolución temporal de ventas")
 st.caption("Gráfico de líneas con media móvil de 7 días para suavizar la variabilidad diaria.")
 
 ventas_diarias = df.groupby("Date")["Total"].sum().reset_index().sort_values("Date")
@@ -105,7 +95,7 @@ st.divider()
 # ────────────────────────────────────────────────
 # ANÁLISIS 2 — LÍNEAS DE PRODUCTO (MÉTRICA SELECCIONABLE)
 # ────────────────────────────────────────────────
-st.subheader("📦 Análisis 2: Rendimiento por línea de producto")
+st.subheader(" Análisis 2: Rendimiento por línea de producto")
 
 metrica = st.radio(
     "Selecciona la métrica de comparación:",
@@ -136,7 +126,7 @@ st.divider()
 # ────────────────────────────────────────────────
 # ANÁLISIS 4 — RATING POR SUCURSAL
 # ────────────────────────────────────────────────
-st.subheader("⭐ Análisis 4: Distribución del rating por sucursal")
+st.subheader(" Análisis 4: Distribución del rating por sucursal")
 st.caption("Violin plot: muestra la forma completa de la distribución del rating.")
 
 branch_label_map = {"A": "A — Yangon", "B": "B — Mandalay", "C": "C — Naypyitaw"}
@@ -159,7 +149,7 @@ st.divider()
 # ────────────────────────────────────────────────
 # ANÁLISIS 6 — MEDIOS DE PAGO (SEGMENTACIÓN VARIABLE)
 # ────────────────────────────────────────────────
-st.subheader("💳 Análisis 6: Preferencia de medios de pago")
+st.subheader(" Análisis 6: Preferencia de medios de pago")
 
 seg_col = st.selectbox(
     "Dimensión de segmentación:",
@@ -186,7 +176,7 @@ st.divider()
 # ────────────────────────────────────────────────
 # ANÁLISIS 8 — MAPA DE CALOR HORA × DÍA
 # ────────────────────────────────────────────────
-st.subheader("🕐 Análisis 8: Mapa de calor de ventas — Hora × Día")
+st.subheader(" Análisis 8: Mapa de calor de ventas — Hora × Día")
 st.caption("Identifica los momentos de mayor demanda durante la semana.")
 
 day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -206,9 +196,3 @@ ax8.tick_params(axis="x", rotation=0)
 ax8.tick_params(axis="y", rotation=0)
 plt.tight_layout()
 st.pyplot(fig8)
-
-# ────────────────────────────────────────────────
-# PIE DE PÁGINA
-# ────────────────────────────────────────────────
-st.divider()
-st.caption("Fuente: Supermarket Sales Dataset (Kaggle) | Visualización de Datos en Python") 
